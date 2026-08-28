@@ -1,5 +1,7 @@
 'use strict';
 
+const APP_VERSION = '1.0.0';
+
 const COLS = 10;
 const ROWS = 20;
 const BLOCK = 30;
@@ -39,6 +41,9 @@ const overlay = document.getElementById('overlay');
 const overlayTitle = document.getElementById('overlay-title');
 const overlayScore = document.getElementById('overlay-score');
 const restartBtn = document.getElementById('restart-btn');
+const versionEl = document.getElementById('version');
+
+versionEl.textContent = `v${APP_VERSION}`;
 
 let board, current, next, score, lines, level, paused, gameOver, lastTime, dropAccum, dropInterval, animId;
 
