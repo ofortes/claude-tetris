@@ -42,6 +42,7 @@ Es una versión jugable del Tetris clásico con todas las mecánicas que esperar
 - **Sistema de puntuación** clásico de Tetris (100 / 300 / 500 / 800 multiplicado por nivel).
 - **Niveles** que aumentan cada 10 líneas y aceleran la caída.
 - **Pausa** y **Game Over** con opción de reinicio.
+- **Título del juego y versión** visibles en la parte superior, para saber en todo momento qué versión se está jugando (ver [`CHANGELOG.md`](CHANGELOG.md) para el historial de cambios).
 
 ---
 
@@ -96,6 +97,7 @@ El juego se compone de tres archivos que cooperan:
 
 Define la estructura visual:
 
+- Una barra de título con el nombre del juego (`TETRIS`) y el número de versión actual (`#version`).
 - Un `<canvas id="board">` de **300 × 600** píxeles donde se renderiza el tablero.
 - Un panel lateral con `SCORE`, `LINES`, `LEVEL`, vista de la siguiente pieza y la lista de controles.
 - Un overlay para los estados **PAUSA** y **GAME OVER**.
@@ -159,6 +161,7 @@ Cuando una pieza recién generada ya colisiona al aparecer (`spawn`), se dispara
 ├── index.html      # Estructura del DOM y canvas
 ├── style.css       # Estilos del juego (dark theme)
 ├── game.js         # Toda la lógica del Tetris (~300 líneas)
+├── CHANGELOG.md    # Historial de versiones
 └── README.md
 ```
 
@@ -176,6 +179,9 @@ Algunos parámetros fáciles de tunear en `game.js`:
 | `COLORS`       | Paleta de colores por tipo de pieza      | 7 colores             |
 | `LINE_SCORES`  | Puntos por 1, 2, 3 o 4 líneas eliminadas | `[0,100,300,500,800]` |
 | `dropInterval` | Velocidad inicial de caída en ms         | `1000`                |
+| `APP_VERSION`  | Versión mostrada junto al título         | `'1.0.0'`              |
+
+> Al lanzar cambios notables, actualiza `APP_VERSION` en `game.js` y añade una entrada en [`CHANGELOG.md`](CHANGELOG.md) para que el usuario pueda ver si hay una actualización disponible.
 
 > Si cambias `COLS`, `ROWS` o `BLOCK`, recuerda ajustar también `width` y `height` del `<canvas id="board">` en `index.html` para que coincida (`COLS × BLOCK` × `ROWS × BLOCK`).
 

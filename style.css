@@ -19,6 +19,29 @@ body {
   position: relative;
 }
 
+.title-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: #7aa2f7;
+  text-shadow: 0 0 20px rgba(122, 162, 247, 0.4);
+}
+
+.version {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  color: #555570;
+  letter-spacing: 1px;
+}
+
 .game-container {
   display: flex;
   gap: 20px;
