@@ -1,51 +1,57 @@
-name: Claude Issue Triage
+name: Claude Issue Formatter
 
 on:
   issues:
     types: [opened, edited]
 
 jobs:
-  triage:
+  format-issue:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       issues: write
       id-token: write
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: Run Claude Issue Triage
+      - name: Format issue with Claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--allowedTools Bash(gh issue *)"
           prompt: |
-            Analiza el issue #${{ github.event.issue.number }} de este repositorio
-            (título: "${{ github.event.issue.title }}").
+            You are a GitHub issue formatter for a Tetris game project (vanilla JS/HTML/CSS, no dependencies).
 
-            1. Lee el cuerpo del issue y, si es necesario, el código relevante en
-               game.js, index.html o style.css para entender el problema.
-            2. Asigna los labels que correspondan usando SOLO los labels ya
-               existentes en el repo (bug, documentation, duplicate, enhancement,
-               good first issue, help wanted, invalid, question, wontfix). No
-               crees labels nuevos. Usa `gh issue edit ${{ github.event.issue.number }}
-               --add-label "<label>"` para cada uno; si un label ya no aplica tras
-               una edición, quítalo con `--remove-label`.
-            3. Publica un comentario en el issue (`gh issue comment
-               ${{ github.event.issue.number }} --body "..."`) con un diagnóstico
-               general en español que incluya:
-               - Resumen del problema.
-               - Causa probable (si aplica) o información que falta para
-                 diagnosticar.
-               - Área(s)/función(es) del código afectadas (con referencia a
-                 archivo y, si es posible, nombre de función).
-               - Complejidad estimada de la solución (baja/media/alta) y una
-                 breve sugerencia de enfoque, sin implementar el fix.
-               Si el issue ya tiene un comentario de diagnóstico previo de Claude
-               (por una edición anterior), actualiza/reemplaza tu análisis con uno
-               nuevo en un comentario adicional en vez de repetir literalmente el
-               mismo texto.
-          claude_args: '--allowedTools "Bash(gh issue edit:*),Bash(gh issue comment:*),Bash(gh label list:*)"'
+            An issue was just ${{ github.event.action }} with the following details:
+            - Issue number: #${{ github.event.issue.number }}
+            - Title: ${{ github.event.issue.title }}
+            - Body: ${{ github.event.issue.body }}
+            - Author: ${{ github.event.issue.user.login }}
+
+            Your tasks:
+            1. **Add labels** based on the issue content. Use only these labels:
+               - `bug` — something is broken or behaving incorrectly
+               - `enhancement` — new feature or improvement request
+               - `question` — asking for help or clarification
+               - `documentation` — docs need updating
+               - `good first issue` — simple, beginner-friendly task
+               - `duplicate` — if it seems like a known/repeated problem
+
+            2. **Post a comment** on the issue that includes:
+               - A brief, friendly summary of what the issue is about (1-2 sentences)
+               - A "Formatted Report" section with:
+                 - **Type**: Bug / Feature Request / Question / Other
+                 - **Summary**: one clear sentence describing the problem or request
+                 - **Steps to reproduce** (for bugs): list them if not provided, ask the user to provide them if it's a bug
+                 - **Expected behavior** (for bugs): what should happen
+                 - **Suggested labels**: the labels you applied and why
+               - A closing note thanking the contributor
+
+            Use the `gh` CLI to apply labels and post the comment. Example commands:
+              gh issue edit ${{ github.event.issue.number }} --add-label "bug" --repo ${{ github.repository }}
+              gh issue comment ${{ github.event.issue.number }} --body "..." --repo ${{ github.repository }}
+
+            Be concise, helpful, and friendly. Do not over-engineer the response.
