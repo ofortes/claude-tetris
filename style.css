@@ -272,6 +272,28 @@ kbd {
   transform: translateX(20px);
 }
 
+/* ---- Selector de skin ---- */
+.skin-select {
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  color: var(--kbd-color);
+  border-radius: 6px;
+  padding: 3px 6px;
+  font-size: 11px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.skin-select:focus {
+  outline: 1px solid var(--value-color);
+}
+
+/* ---- Skin neon ---- */
+body.skin-neon #board,
+body.skin-neon #next-canvas {
+  background: #000000;
+}
+
 /* ---- Overlay ---- */
 .overlay {
   position: absolute;
