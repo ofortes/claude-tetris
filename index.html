@@ -40,6 +40,22 @@
           <span class="value" id="level">1</span>
         </div>
 
+        <div class="panel-section highscores-section">
+          <span class="label">TOP 5</span>
+          <ol id="highscore-list"></ol>
+          <div class="stats-row">
+            <div class="stat">
+              <span class="label">MEJOR COMBO</span>
+              <span class="value small" id="best-combo">0</span>
+            </div>
+            <div class="stat">
+              <span class="label">MÁX. LÍNEAS</span>
+              <span class="value small" id="max-lines">0</span>
+            </div>
+          </div>
+          <button type="button" id="reset-records-btn">Resetear records</button>
+        </div>
+
         <div class="panel-section">
           <span class="label">NEXT</span>
           <canvas id="next-canvas" width="120" height="120"></canvas>
@@ -52,7 +68,7 @@
             <li><kbd>↑</kbd> rotar</li>
             <li><kbd>↓</kbd> bajar</li>
             <li><kbd>Space</kbd> caída</li>
-            <li><kbd>P</kbd> pausa</li>
+            <li><kbd>P</kbd> / <kbd>Esc</kbd> pausa</li>
           </ul>
         </div>
       </aside>
@@ -62,7 +78,36 @@
       <div class="overlay-box">
         <p id="overlay-title">GAME OVER</p>
         <p id="overlay-score"></p>
-        <button id="restart-btn">Reiniciar</button>
+        <div id="save-score-section" class="hidden">
+          <p class="save-score-label">¡Nuevo record! Ingresa tu nombre:</p>
+          <input id="player-name-input" type="text" maxlength="12" placeholder="AAA" autocomplete="off" />
+          <button type="button" id="save-score-btn">Guardar</button>
+        </div>
+        <button id="restart-btn" type="button">Reiniciar</button>
+
+        <div id="pause-menu" class="hidden">
+          <div class="pause-actions">
+            <button id="resume-btn" type="button">Reanudar</button>
+            <button id="pause-restart-btn" type="button">Reiniciar</button>
+            <button id="toggle-controls-btn" type="button">Ver controles</button>
+          </div>
+
+          <div class="panel-section start-level">
+            <label class="label" for="start-level-select">NIVEL INICIAL</label>
+            <select id="start-level-select"></select>
+          </div>
+
+          <div id="pause-controls" class="panel-section controls hidden">
+            <span class="label">CONTROLES</span>
+            <ul>
+              <li><kbd>←</kbd><kbd>→</kbd> mover</li>
+              <li><kbd>↑</kbd> rotar</li>
+              <li><kbd>↓</kbd> bajar</li>
+              <li><kbd>Space</kbd> caída</li>
+              <li><kbd>P</kbd> / <kbd>Esc</kbd> pausa</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -133,6 +133,71 @@ body {
   letter-spacing: 1px;
 }
 
+/* ---- Highscores ---- */
+.highscores-section {
+  gap: 8px;
+}
+
+#highscore-list {
+  list-style: decimal inside;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#highscore-list li {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  color: var(--fg);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+#highscore-list li.empty {
+  list-style: none;
+  color: var(--controls-color);
+  font-style: italic;
+}
+
+#highscore-list li.highlight {
+  background: var(--value-color);
+  color: var(--btn-color);
+  font-weight: 700;
+}
+
+.stats-row {
+  display: flex;
+  gap: 12px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.value.small {
+  font-size: 16px;
+}
+
+#reset-records-btn {
+  background: transparent;
+  color: var(--controls-color);
+  border: 1px solid var(--kbd-border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+  transition: background 0.15s, color 0.15s;
+}
+
+#reset-records-btn:hover {
+  background: var(--kbd-bg);
+  color: var(--fg);
+}
+
 #next-canvas {
   display: block;
   border: 1px solid var(--board-border);
@@ -245,6 +310,10 @@ body.skin-neon #next-canvas {
   display: none;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .overlay-box {
   text-align: center;
   display: flex;
@@ -282,4 +351,106 @@ body.skin-neon #next-canvas {
 
 #restart-btn:hover {
   background: var(--btn-hover-bg);
+}
+
+/* ---- Guardar puntuación (game over) ---- */
+#save-score-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+#save-score-section.hidden {
+  display: none;
+}
+
+.save-score-label {
+  font-size: 13px;
+  color: var(--fg);
+}
+
+#player-name-input {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--kbd-border);
+  background: var(--kbd-bg);
+  color: var(--fg);
+  width: 140px;
+}
+
+#save-score-btn {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.15s;
+}
+
+#save-score-btn:hover {
+  background: var(--btn-hover-bg);
+}
+
+/* ---- Menú de pausa ---- */
+#pause-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  min-width: 220px;
+}
+
+.pause-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.pause-actions button {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.15s;
+}
+
+.pause-actions button:hover {
+  background: var(--btn-hover-bg);
+}
+
+.start-level {
+  align-items: center;
+  width: 100%;
+}
+
+#start-level-select {
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  color: var(--fg);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#pause-controls {
+  align-items: center;
+  border-top: 1px solid var(--board-border);
+  padding-top: 12px;
+  width: 100%;
 }
